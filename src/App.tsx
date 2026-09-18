@@ -16,7 +16,9 @@ function App() {
 
       <main className="section">
         <div className="container app-container">
-          {session.screen === 'settings' && <SettingsScreen onStart={session.start} />}
+          {session.screen === 'settings' && (
+            <SettingsScreen onStart={session.start} initialSettings={session.settings} />
+          )}
 
           {session.screen === 'practice' && session.problem && session.settings && (
             <PracticeScreen

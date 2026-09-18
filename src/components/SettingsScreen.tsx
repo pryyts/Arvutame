@@ -18,14 +18,19 @@ const TIMED_OPTIONS = [
 
 interface Props {
   onStart: (settings: Settings) => void;
+  initialSettings: Settings | null;
 }
 
-export function SettingsScreen({ onStart }: Props) {
-  const [ops, setOps] = useState<Operation[]>(['add', 'sub', 'mul', 'div']);
-  const [max, setMax] = useState(100);
-  const [modeType, setModeType] = useState<Mode['type']>('count');
-  const [count, setCount] = useState(10);
-  const [seconds, setSeconds] = useState(60);
+export function SettingsScreen({ onStart, initialSettings }: Props) {
+  const [ops, setOps] = useState<Operation[]>(initialSettings?.ops ?? ['add', 'sub', 'mul', 'div']);
+  const [max, setMax] = useState(initialSettings?.max ?? 100);
+  const [modeType, setModeType] = useState<Mode['type']>(initialSettings?.mode.type ?? 'count');
+  const [count, setCount] = useState(
+    initialSettings?.mode.type === 'count' ? initialSettings.mode.count : 10,
+  );
+  const [seconds, setSeconds] = useState(
+    initialSettings?.mode.type === 'timed' ? initialSettings.mode.seconds : 60,
+  );
   const [showOpsError, setShowOpsError] = useState(false);
 
   function toggleOp(op: Operation) {
