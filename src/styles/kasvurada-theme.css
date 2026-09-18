@@ -1,0 +1,152 @@
+/* =========================================================================
+   KASVURADA — game-like/achievement disainikatse
+   -------------------------------------------------------------------------
+   Rakendab noorte-platvorm/STYLE_GUIDE.md tokenid SAMADE muutujanimede alla,
+   mida design-system.css (Warm & Human) juba kasutab, nii et olemasolevad
+   komponendiklassid (.btn, .card, .input, .navbar jne) värvivad end ümber
+   ilma, et neid oleks vaja ümber kirjutada.
+
+   Aktiveerub ainult siis, kui <html data-design="kasvurada">. Vaikimisi
+   (data-design puudub) jääb kehtima endine Warm & Human disain — seda faili
+   EI KUSTUTATA ega asendata, teemasid saab rakenduses lennult vahetada.
+   ========================================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap');
+
+/* ---------- Tokenid — vaikimisi tume (Kasvurada default = dark) ---------- */
+:root[data-design="kasvurada"] {
+  --color-bg: #0F1222;
+  --color-surface: #1B1F36;
+  --color-surface-alt: #242A47;
+  --color-border: #333A5C;
+  --color-border-strong: #454D78;
+  --color-text: #F5F5FA;
+  --color-text-muted: #A8ACC7;
+  --color-text-inverse: #FFFFFF;
+
+  --color-primary: #6C5CE7;
+  --color-primary-hover: #7A6BEF;
+  --color-primary-active: #4E3FCB;
+  --color-primary-soft: color-mix(in srgb, #6C5CE7 25%, var(--color-surface));
+
+  --color-secondary: #FFC542;
+  --color-secondary-hover: #FFD670;
+  --color-secondary-soft: color-mix(in srgb, #FFC542 25%, var(--color-surface));
+
+  --color-success: #2ED47A;
+  --color-success-soft: color-mix(in srgb, #2ED47A 22%, var(--color-surface));
+  --color-warning: #FFC542;
+  --color-warning-soft: color-mix(in srgb, #FFC542 22%, var(--color-surface));
+  --color-danger: #FF5A5F;
+  --color-danger-soft: color-mix(in srgb, #FF5A5F 22%, var(--color-surface));
+  --color-info: #4CC3FF;
+  --color-info-soft: color-mix(in srgb, #4CC3FF 22%, var(--color-surface));
+
+  /* Kasvurada-spetsiifilised gamification-tokenid, kasutuseks tulevastes komponentides */
+  --color-xp: #FFC542;
+  --color-level-up: #2ED47A;
+  --color-streak: #FF7A45;
+
+  --font-base: 'Inter', system-ui, sans-serif;
+  --font-display: 'Baloo 2', ui-rounded, 'Segoe UI', sans-serif;
+
+  --fw-regular: 400;
+  --fw-medium: 600;
+  --fw-bold: 700;
+  --fw-black: 800;
+
+  --fs-xs: 0.75rem;
+  --fs-sm: 0.8125rem;
+  --fs-base: 1rem;
+  --fs-lg: 1.125rem;
+  --fs-xl: 1.25rem;
+  --fs-2xl: 1.375rem;
+  --fs-3xl: 1.75rem;
+  --fs-4xl: 2rem;
+  --fs-5xl: 2.5rem;
+  --lh-tight: 1.2;
+  --lh-base: 1.5;
+  --lh-relaxed: 1.6;
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-8: 48px;
+  --space-10: 56px;
+  --space-12: 64px;
+  --space-16: 80px;
+  --space-20: 96px;
+
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-xl: 28px;
+  --radius-full: 999px;
+
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.45);
+
+  --transition-fast: 150ms ease-out;
+  --transition-base: 400ms ease-out;
+
+  color-scheme: dark;
+}
+
+/* ---------- Hele variant (STYLE_GUIDE p.2.1 kohustuslik alternatiiv) ---------- */
+:root[data-design="kasvurada"][data-theme="light"] {
+  --color-bg: #FBFAF7;
+  --color-surface: #FFFFFF;
+  --color-surface-alt: #F2F1EC;
+  --color-border: #E4E1D8;
+  --color-border-strong: #D3CEC0;
+  --color-text: #1C1B22;
+  --color-text-muted: #6B6A73;
+  --color-text-inverse: #FFFFFF;
+
+  --color-primary-soft: color-mix(in srgb, #6C5CE7 16%, var(--color-surface));
+  --color-secondary-soft: color-mix(in srgb, #FFC542 25%, var(--color-surface));
+  --color-success-soft: color-mix(in srgb, #2ED47A 18%, var(--color-surface));
+  --color-warning-soft: color-mix(in srgb, #FFC542 18%, var(--color-surface));
+  --color-danger-soft: color-mix(in srgb, #FF5A5F 18%, var(--color-surface));
+  --color-info-soft: color-mix(in srgb, #4CC3FF 18%, var(--color-surface));
+
+  --shadow-sm: 0 2px 8px rgba(28, 27, 34, 0.1);
+  --shadow-md: 0 8px 24px rgba(28, 27, 34, 0.16);
+  --shadow-lg: 0 16px 40px rgba(28, 27, 34, 0.2);
+
+  color-scheme: light;
+}
+
+/* ---------- Pealkirjad kasutavad Baloo 2, keha Inter (STYLE_GUIDE p.3) ---------- */
+[data-design="kasvurada"] h1,
+[data-design="kasvurada"] h2,
+[data-design="kasvurada"] .navbar__brand {
+  font-family: var(--font-display);
+  font-weight: var(--fw-bold);
+}
+
+/* Pill-kujuline peamine CTA-nupp, nagu juhend soovitab lühikeste tegevuste jaoks */
+[data-design="kasvurada"] .btn--lg {
+  border-radius: var(--radius-full);
+}
+[data-design="kasvurada"] .btn:active:not(:disabled) {
+  transform: scale(0.97);
+}
+
+/* .radio-card kasutab valitud olekus color: var(--color-primary-active) teksti värvina.
+   Warm & Human juures on primary-active piisavalt kontrastne oma soft-taustaga, aga
+   Kasvurada violetne primary-active (#4E3FCB) jääb violetsel primary-soft taustal
+   tumedas teemas liiga tuhmiks — vahetame loetavuse jaoks --color-text vastu. */
+[data-design="kasvurada"] .radio-card input:checked + .radio-card__box {
+  color: var(--color-text);
+  font-weight: var(--fw-bold);
+}
+
+/* Suuremad puutesihtmärgid (STYLE_GUIDE p.4.4) */
+[data-design="kasvurada"] .radio-card__box {
+  min-height: 44px;
+}
