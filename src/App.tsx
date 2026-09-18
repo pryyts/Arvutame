@@ -9,10 +9,9 @@ function App() {
 
   return (
     <>
-      <DesignToggle />
-
       <header className="navbar">
         <span className="navbar__brand">🧮 Peastarvutamine</span>
+        <DesignToggle />
       </header>
 
       <main className="section">

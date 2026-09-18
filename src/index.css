@@ -1,11 +1,14 @@
 @import './styles/design-system.css';
 @import './styles/kasvurada-theme.css';
 
+.navbar {
+  flex-wrap: wrap;
+  row-gap: var(--space-2);
+}
+
 .design-toggle {
-  position: fixed;
-  top: var(--space-3);
-  right: var(--space-3);
-  z-index: 100;
+  flex-wrap: wrap;
+  justify-content: flex-end;
 }
 
 /* Ainult selle rakenduse enda paigutus, mitte osa taaskasutatavast disainisüsteemist */
