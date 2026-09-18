@@ -1,3 +1,4 @@
+import { getPointsPerMinute } from '../core/scoring';
 import type { Settings } from '../core/types';
 
 interface Props {
@@ -5,6 +6,7 @@ interface Props {
   correct: number;
   wrong: number;
   elapsedMs: number;
+  points: number;
   onRestart: () => void;
 }
 
@@ -24,9 +26,10 @@ function StatCard({ value, label }: { value: string | number; label: string }) {
   );
 }
 
-export function ResultsScreen({ settings, correct, wrong, elapsedMs, onRestart }: Props) {
+export function ResultsScreen({ settings, correct, wrong, elapsedMs, points, onRestart }: Props) {
   const total = correct + wrong;
   const percent = total > 0 ? Math.round((correct / total) * 100) : 0;
+  const pointsPerMinute = getPointsPerMinute(points, elapsedMs);
 
   return (
     <section>
@@ -39,6 +42,7 @@ export function ResultsScreen({ settings, correct, wrong, elapsedMs, onRestart }
         ) : (
           <StatCard value={total} label="Tehteid kokku" />
         )}
+        <StatCard value={pointsPerMinute.toFixed(1)} label="Punkti minutis" />
       </div>
       <button className="btn btn--primary btn--lg" style={{ width: '100%' }} onClick={onRestart}>
         Uus harjutus

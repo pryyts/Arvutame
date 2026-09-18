@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { generateProblem } from '../core/problemGenerator';
+import { getPointValue } from '../core/scoring';
 import type { Problem, Settings } from '../core/types';
 
 export type Screen = 'settings' | 'practice' | 'results';
@@ -18,12 +19,14 @@ export function useSession() {
   const [correctHint, setCorrectHint] = useState('');
   const [inputDisabled, setInputDisabled] = useState(false);
   const [elapsedMs, setElapsedMs] = useState(0);
+  const [points, setPoints] = useState(0);
 
   const settingsRef = useRef<Settings | null>(null);
   const problemRef = useRef<Problem | null>(null);
   const indexRef = useRef(0);
   const correctRef = useRef(0);
   const wrongRef = useRef(0);
+  const pointsRef = useRef(0);
   const timeLeftRef = useRef(0);
   const startTimeRef = useRef(0);
   const activeRef = useRef(false);
@@ -78,9 +81,11 @@ export function useSession() {
     indexRef.current = 0;
     correctRef.current = 0;
     wrongRef.current = 0;
+    pointsRef.current = 0;
     setIndex(0);
     setCorrect(0);
     setWrong(0);
+    setPoints(0);
     startTimeRef.current = Date.now();
     activeRef.current = true;
     awaitingNextRef.current = false;
@@ -107,6 +112,8 @@ export function useSession() {
     if (isCorrect) {
       correctRef.current += 1;
       setCorrect(correctRef.current);
+      pointsRef.current += getPointValue(problemRef.current!.operation, settingsRef.current!.max);
+      setPoints(pointsRef.current);
       advance();
     } else {
       wrongRef.current += 1;
@@ -141,6 +148,7 @@ export function useSession() {
     correctHint,
     inputDisabled,
     elapsedMs,
+    points,
     start,
     submit,
     cancel,

@@ -11,13 +11,13 @@ function generateAddition(max: number): Problem {
   const result = randInt(2, max);
   const a = randInt(1, result - 1);
   const b = result - a;
-  return { a, b, opSymbol: '+', answer: result };
+  return { a, b, operation: 'add', opSymbol: '+', answer: result };
 }
 
 function generateSubtraction(max: number): Problem {
   const minuend = randInt(2, max);
   const subtrahend = randInt(1, minuend - 1);
-  return { a: minuend, b: subtrahend, opSymbol: '−', answer: minuend - subtrahend };
+  return { a: minuend, b: subtrahend, operation: 'sub', opSymbol: '−', answer: minuend - subtrahend };
 }
 
 function generateMultiplication(max: number): Problem {
@@ -25,7 +25,7 @@ function generateMultiplication(max: number): Problem {
   const a = randInt(2, aMax);
   const bMax = Math.max(2, Math.floor(max / a));
   const b = randInt(2, bMax);
-  return { a, b, opSymbol: '×', answer: a * b };
+  return { a, b, operation: 'mul', opSymbol: '×', answer: a * b };
 }
 
 function generateDivision(max: number): Problem {
@@ -33,7 +33,7 @@ function generateDivision(max: number): Problem {
   const quotientMax = Math.max(1, Math.floor(max / divisor));
   const quotient = randInt(1, quotientMax);
   const dividend = divisor * quotient;
-  return { a: dividend, b: divisor, opSymbol: '÷', answer: quotient };
+  return { a: dividend, b: divisor, operation: 'div', opSymbol: '÷', answer: quotient };
 }
 
 const GENERATORS: Record<Operation, (max: number) => Problem> = {

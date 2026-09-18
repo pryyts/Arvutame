@@ -13,6 +13,7 @@ export interface Settings {
 export interface Problem {
   a: number;
   b: number;
+  operation: Operation;
   opSymbol: string;
   answer: number;
 }

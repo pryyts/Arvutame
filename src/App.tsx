@@ -38,6 +38,7 @@ function App() {
               correct={session.correct}
               wrong={session.wrong}
               elapsedMs={session.elapsedMs}
+              points={session.points}
               onRestart={session.restart}
             />
           )}
