@@ -35,7 +35,10 @@ export function SettingsScreen({ onStart, initialSettings }: Props) {
   const startButtonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
-    startButtonRef.current?.focus();
+    // Lükatud järgmisesse tick'i, vt ResultsScreen'i sama kommentaari:
+    // väldib sama Enter-vajutuse keyup'i käivitumist kohe uuel fokuseeritud nupul.
+    const id = window.setTimeout(() => startButtonRef.current?.focus(), 0);
+    return () => window.clearTimeout(id);
   }, []);
 
   function toggleOp(op: Operation) {

@@ -34,7 +34,11 @@ export function ResultsScreen({ settings, correct, wrong, elapsedMs, points, onR
   const restartButtonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
-    restartButtonRef.current?.focus();
+    // Lükatud järgmisesse tick'i: kui fokuseerime kohe, jõuab seda tegevust
+    // vallandanud Enter-vajutuse keyup samale (uuele) nupule ja käivitab
+    // selle uuesti, hüpates kohe tagasi seadistusele.
+    const id = window.setTimeout(() => restartButtonRef.current?.focus(), 0);
+    return () => window.clearTimeout(id);
   }, []);
 
   return (
