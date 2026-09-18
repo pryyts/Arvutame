@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import type { Mode, Operation, Settings } from '../core/types';
 
 const OPERATIONS: { value: Operation; label: string }[] = [
@@ -32,6 +32,11 @@ export function SettingsScreen({ onStart, initialSettings }: Props) {
     initialSettings?.mode.type === 'timed' ? initialSettings.mode.seconds : 60,
   );
   const [showOpsError, setShowOpsError] = useState(false);
+  const startButtonRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    startButtonRef.current?.focus();
+  }, []);
 
   function toggleOp(op: Operation) {
     setOps((prev) => (prev.includes(op) ? prev.filter((o) => o !== op) : [...prev, op]));
@@ -150,7 +155,12 @@ export function SettingsScreen({ onStart, initialSettings }: Props) {
         </div>
       )}
 
-      <button className="btn btn--primary btn--lg" style={{ width: '100%', marginTop: 'var(--space-4)' }} onClick={handleStart}>
+      <button
+        ref={startButtonRef}
+        className="btn btn--primary btn--lg"
+        style={{ width: '100%', marginTop: 'var(--space-4)' }}
+        onClick={handleStart}
+      >
         Alusta harjutust
       </button>
     </section>

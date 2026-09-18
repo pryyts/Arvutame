@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react';
 import { getPointsPerMinute } from '../core/scoring';
 import type { Settings } from '../core/types';
 
@@ -30,6 +31,11 @@ export function ResultsScreen({ settings, correct, wrong, elapsedMs, points, onR
   const total = correct + wrong;
   const percent = total > 0 ? Math.round((correct / total) * 100) : 0;
   const pointsPerMinute = getPointsPerMinute(points, elapsedMs);
+  const restartButtonRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    restartButtonRef.current?.focus();
+  }, []);
 
   return (
     <section>
@@ -44,7 +50,12 @@ export function ResultsScreen({ settings, correct, wrong, elapsedMs, points, onR
         )}
         <StatCard value={pointsPerMinute.toFixed(1)} label="Punkti minutis" />
       </div>
-      <button className="btn btn--primary btn--lg" style={{ width: '100%' }} onClick={onRestart}>
+      <button
+        ref={restartButtonRef}
+        className="btn btn--primary btn--lg"
+        style={{ width: '100%' }}
+        onClick={onRestart}
+      >
         Uus harjutus
       </button>
     </section>
